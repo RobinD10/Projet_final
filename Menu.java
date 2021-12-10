@@ -5,86 +5,120 @@
  */
 package projet_final;
 
+import vue.TableauScores;
+import vue.Regles;
+import java.awt.*;
+import java.awt.event.*;
 import javax.swing.*;
+import vue.Plateau;
 /**
  *
  * @author dijou
  */
 public class Menu extends JFrame {
-    private JButton jButton1 = new JButton();
-    private JLabel jLabel1 = new JLabel();
-    private JMenu jMenu1 = new JMenu();
-    private JMenu jMenu2 = new JMenu();
-    private JMenuBar jMenuBar1 = new JMenuBar();
-    private JMenuItem jMenuItem1 = new JMenuItem();
-    private JMenuItem jMenuItem2 = new JMenuItem();
-    private JMenuItem jMenuItem3 = new JMenuItem();
+    private JButton boutonQuitter = new JButton();
+    private JLabel imageBackground = new JLabel();
+    private JMenu menuJouer = new JMenu();
+    private JMenu menuRegles = new JMenu();
+    private JMenuBar barreMenu = new JMenuBar();
+    private JMenuItem sousMenu1 = new JMenuItem();
+    private JMenuItem sousMenu2 = new JMenuItem();
+    private JMenuItem sousMenuScores = new JMenuItem();
     
     public Menu() {
-        initComponents();
+        initialisation();
     }
+                         
+    private void initialisation() {
 
-    @SuppressWarnings("unchecked")
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
-    private void initComponents() {
-
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMinimumSize(new java.awt.Dimension(1000, 692));
-        setPreferredSize(new java.awt.Dimension(1000, 692));
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setPreferredSize(new Dimension(1000, 692));
+        setResizable(false);
         getContentPane().setLayout(null);
 
-        jButton1.setFont(new java.awt.Font("Microsoft Sans Serif", 1, 18)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setText("Quitter");
-        jButton1.setBorder(null);
-        jButton1.setBorderPainted(false);
-        jButton1.setContentAreaFilled(false);
-        jButton1.setOpaque(false);
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+        boutonQuitter.setFont(new Font("Microsoft Sans Serif", 1, 18)); // NOI18N
+        boutonQuitter.setForeground(new Color(255, 255, 255));
+        boutonQuitter.setText("Quitter");
+        boutonQuitter.setBorder(null);
+        boutonQuitter.setBorderPainted(false);
+        boutonQuitter.setContentAreaFilled(false);
+        boutonQuitter.setOpaque(false);
+        boutonQuitter.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                boutonQuitterActionPerformed(e);
             }
         });
-        getContentPane().add(jButton1);
-        jButton1.setBounds(759, 555, 130, 50);
+        getContentPane().add(boutonQuitter);
+        boutonQuitter.setBounds(759, 555, 130, 50);
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/projet_final/ThinIce.png"))); // NOI18N
-        getContentPane().add(jLabel1);
-        jLabel1.setBounds(0, 0, 1000, 660);
+        imageBackground.setIcon(new ImageIcon(getClass().getResource("/projet_final/ThinIce.png")));
+        getContentPane().add(imageBackground);
+        imageBackground.setBounds(0, 0, 1000, 660);
 
-        jMenu1.setText("Jouer");
+        menuJouer.setText("Jouer");
 
-        jMenuItem1.setText("Nouvelle Partie");
-        jMenu1.add(jMenuItem1);
-
-        jMenuItem2.setText("Reprendre une Partie");
-        jMenu1.add(jMenuItem2);
-
-        jMenuItem3.setText("Score");
-        jMenu1.add(jMenuItem3);
-
-        jMenuBar1.add(jMenu1);
-
-        jMenu2.setText("Règles");
-        jMenu2.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jMenu2MouseClicked(evt);
+        sousMenu1.setText("Nouvelle Partie");
+        sousMenu1.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                sousMenu1ActionPerformed(e);
             }
         });
-        jMenuBar1.add(jMenu2);
+        barreMenu.add(menuJouer);
+        menuJouer.add(sousMenu1);
 
-        setJMenuBar(jMenuBar1);
+        sousMenu2.setText("Reprendre une Partie");
+        menuJouer.add(sousMenu2);
 
+        sousMenuScores.setText("Score");
+        sousMenuScores.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                sousMenuScoresActionPerformed(e);
+            }
+        });
+        menuJouer.add(sousMenuScores);        
+
+        menuRegles.setText("Règles");
+        menuRegles.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent evt) {
+                menuReglesMouseClicked(evt);
+            }
+        });
+        barreMenu.add(menuRegles);
+
+        setJMenuBar(barreMenu);        
+        
         pack();
-    }// </editor-fold>                        
+    }                     
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
+    private void boutonQuitterActionPerformed(ActionEvent e) {                                         
         this.dispose();
     }                                                                           
 
-    private void jMenu2MouseClicked(java.awt.event.MouseEvent evt) {                                    
+    private void menuReglesMouseClicked(MouseEvent evt) {                                    
         Regles mesRegles = new Regles();
         mesRegles.setVisible(true);
-    }                                   
-
+    }  
+    
+    private void sousMenu1ActionPerformed(ActionEvent e) {                                    
+        /*NouvellePartie monJoueur = new NouvellePartie();
+        monJoueur.setVisible(true);*/
+        //monJoueur.enregistrement();
+        Plateau monPlateau = new Plateau();
+        monPlateau.setVisible(true);
+    } 
+    
+    private void sousMenuScoresActionPerformed(ActionEvent e) {                                    
+        TableauScores monTableau = new TableauScores();
+        monTableau.setVisible(true);
+        //monTableau.ecriture();
+        //test monTest = new test();
+        //monTest.setVisible(true);
+        //monJoueur.enregistrement();
+        /*Plateau monPlateau = new Plateau();
+        monPlateau.setVisible(true);*/
+    } 
 }
